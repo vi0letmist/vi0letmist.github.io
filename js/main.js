@@ -99,6 +99,35 @@ $(document).ready(function () {
     }
 });
 
+Notification.requestPermission(function(status){
+    console.log('Notification permission status : ', status);
+});
+
+function displayNotification(){
+    if(Notification.permission==='granted'){
+        navigator.serviceWorker.getRegistration()
+        .then(function (reg){
+            var options={
+                body:'Ini body notifikasi',
+                icon:'images/ugm.png',
+                vibrate:[100,50,100],
+                data:{
+                    dateofArrival:Date.now(),
+                    primaryKey:1
+                },
+                action:[
+                    {action:'explore', title:'Kunjungi Situs'},
+                    {action:'close',title:'Tutup'}
+                ]
+            };
+            reg.showNotification('Judul Notification',options);
+        })
+    }
+}
+$('#btn-notification').on('click',function(){
+    displayNotification();
+});
+
 if ('serviceWorker' in navigator){
     window.addEventListener('load', function () {
         navigator.serviceWorker.register('serviceworker.js').then(function (reg) {
