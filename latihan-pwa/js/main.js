@@ -1,6 +1,6 @@
 $(document).ready(function () {
     // API
-    var _url = 'https://my-json-server.typicode.com/vi0letmist/latihan_pwa_api/mahasiswaa';
+    var _url = 'https://my-json-server.typicode.com/vi0letmist/latihan_pwa_api/mahasiswa';
     // var _url = 'http://localhost/b2/index.php';
 
     // menampung data yang didapat dari API

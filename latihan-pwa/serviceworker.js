@@ -2,10 +2,10 @@ var CACHE_NAME='my-pwa-cache-v1';
 
 var urlsToCache=[
     '/',
-    'latihan-pwa/css/main.css',
-    'latihan-pwa/js/main.js',
-    'latihan-pwa/js/jquery.min.js',
-    'latihan-pwa/images/ugm.png',
+    'css/main.css',
+    'js/main.js',
+    'js/jquery.min.js',
+    'images/ugm.png',
     'fallback.json'
 ];
 
