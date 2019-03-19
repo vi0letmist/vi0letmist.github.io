@@ -128,12 +128,42 @@ $('#btn-notification').on('click',function(){
     displayNotification();
 });
 
+//ngecek ke-online-nan
+function isOnline(){
+    var connectionStatus=$('#connection-status');
+    if(navigator.online){
+        connectionStatus.html='<p>anda online</p>';
+    }else{
+        connectionStatus.html='<p>anda offline</p>';
+    }
+}
+window.addEventListener('online', isOnline);
+window.addEventListener('offline', isOnline);
+isOnline();
+
+// if ('serviceWorker' in navigator){
+//     window.addEventListener('load', function () {
+//         navigator.serviceWorker.register('serviceworker.js').then(function (reg) {
+//             console.log('SW regis sukses dgn skop',reg.scope)
+//         }, function (err) {
+//             console.log('SW regis failed',err);
+//         })
+//     })
+// } 
 if ('serviceWorker' in navigator){
     window.addEventListener('load', function () {
         navigator.serviceWorker.register('serviceworker.js').then(function (reg) {
-            console.log('SW regis sukses dgn skop',reg.scope)
-        }, function (err) {
-            console.log('SW regis failed',err);
-        })
+            return navigator.serviceWorker.ready;
+        }).then(function(reg){
+            document.getElementById('req-sync').addEventListener('click',function(){
+                reg.sync.register('image-fetch').then(()=>{
+                    console.log('sync-registered');
+                }).catch(function(err){
+                    console.log('unable to fetch image. Error:',err);
+                });
+            });
+        },function(err){
+            console.log('unable to register service worker. Error : ',err);
+        });
     })
 } 

@@ -90,3 +90,21 @@ self.addEventListener('notificationclick',function(e){
         notification.close();
     }
 });
+
+self.addEventListener('sync',function(event){
+    console.log('firing sync');
+    if(event.tag === 'image-fetch'){
+        console.log('sync event fired');
+        event.waitUntil(fetchImage());
+    }
+});
+function fetchImage(){
+    console.log('firing : doSomeStuff()');
+    fetch('images/ugm.png').then(function(response){
+        return response;
+    }).then(function(text){
+        console.log('Request success  ', text);
+    }).catch(function(err){
+        console.log('Request failed ', err);
+    });
+}
